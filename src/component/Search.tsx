@@ -7,5 +7,5 @@
 // }
 
 export const Search = (title: string) => {
-  console.log('title');
+  console.log("title");
 };
