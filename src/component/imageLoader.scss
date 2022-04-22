@@ -1,0 +1,41 @@
+.main {
+  width: 100%;
+  .main-heading {
+    text-align: center;
+    color: #03045e;
+  }
+  .header-style {
+    background-color: #0096c7;
+    height: 50px;
+    padding: 5px;
+    text-align: center;
+    display: block;
+    .header-input {
+      width: 500px;
+      border: 1px solid black;
+
+      outline: none;
+      margin-right: 10px;
+      padding: 5px 10px;
+      background-color: white;
+      border-radius: 20px;
+    }
+    .header-button {
+      background-color: #023e8a;
+      color: white;
+      width: 70px;
+      padding: 5px;
+      border-radius: 20px;
+      outline: none;
+      border: 1px solid #023e8a;
+    }
+  }
+  .gallery {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    .image-style {
+      margin: 10px;
+    }
+  }
+}
