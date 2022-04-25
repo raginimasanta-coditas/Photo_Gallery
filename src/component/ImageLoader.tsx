@@ -1,19 +1,19 @@
-import ReactDOM from "react-dom";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Search } from "./search";
-import Images from "./Images";
+import ReactDOM from 'react-dom';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+// import { Search } from './search';
+import Images from './Images';
 
 const ImageLoader: React.FC = () => {
   const [image, setImage] = useState([]);
-  const [searchedimage, setSearchedimage] = useState("");
+  const [searchedimage, setSearchedimage] = useState('');
   const [currentPage, setCurrentPage] = useState(0);
   const [imgPerPage, setImgPerPage] = useState(10);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
 
-    axios.get("https://jsonplaceholder.typicode.com/photos").then((res) => {
+    axios.get('https://jsonplaceholder.typicode.com/photos').then((res) => {
       console.log(res);
       setImage(res.data.slice(0, 20));
     });
@@ -48,14 +48,7 @@ const ImageLoader: React.FC = () => {
             Search
           </button>
         </div>
-        {/* <div className="gallery">
-          {image.map((i) => (
-            <div className="image-style">
-              <img key={i.id} src={i.url} height={150} width={150}></img>
-              <Images image={image} loading={loading} />
-            </div>
-          ))}
-        </div> */}
+
         <Images image={image} loading={loading} />
       </div>
       <nav aria-label="...">
