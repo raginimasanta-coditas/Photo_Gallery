@@ -1,17 +1,14 @@
-import React from "react";
-import { ImageProps } from "./ImageProps";
+import React from 'react';
+import { ImageProps } from './ImageProps';
 interface Props {
   image: ImageProps[];
-  loading: boolean;
+  pagesVisited: number;
+  imagesPerPage: number;
 }
 
-const Images = (props: any) => {
+const Images = (props: Props) => {
   console.log(props.image);
-  console.log(props.loading);
 
-  if (props.loading) {
-    return <h2>loading....</h2>;
-  }
   return (
     <div className="gallery">
       {props.image.map((img: ImageProps, id: number) => (
@@ -22,8 +19,8 @@ const Images = (props: any) => {
                 <img src={img.url} height={300} width={300}></img>
               </div>
               <div className="flip-card-back">
-                <img src={img.url} alt="thumbNail" />
-                <h3>{img.name}</h3>
+                <img src={img.thumbnailUrl} alt="thumbNail" />
+                <h3>{img.title}</h3>
               </div>
             </div>
           </div>

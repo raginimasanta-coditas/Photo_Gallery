@@ -11,29 +11,19 @@ const ImageLoader = () => {
   const [searchedimage, setSearchedimage] = useState('');
   const [pageNumber, setPageNumber] = useState(0);
   // const [currentPage, setCurrentPage] = useState(1);
-  const [imagesPerPage, setImagesPerPage] = useState(5);
+  const [imagesPerPage, setImagesPerPage] = useState(16);
   // const [loading, setLoading] = useState(false);
   useEffect(() => {
     // setLoading(true);
 
-    axios.get('https://pokeapi.co/api/v2/pokemon').then((res) => {
+    axios.get('https://jsonplaceholder.typicode.com/photos').then((res) => {
       console.log(res);
-      setImage(res.data.results.slice(0, 20));
+      setImage(res.data.slice(0, 200));
     });
     // setLoading(false);
   }, []);
 
   const pagesVisited = pageNumber * imagesPerPage;
-  const displayImage = image
-    .slice(pagesVisited, pagesVisited + imagesPerPage)
-    .map((image: any) => (
-      // <img key={image.id} src={image.url} height={150} width={150}></img>
-      // <span key={image.id} className="gallery">
-      <span className="image-style">
-        <img key={image.id} src={image.url} height={150} width={150}></img>
-      </span>
-      // </span>
-    ));
   const handleClick = () => {
     const filteredimage = image.filter((i: any) => {
       return i.title.includes(searchedimage);
@@ -41,10 +31,9 @@ const ImageLoader = () => {
     setImage(filteredimage);
   };
   const pageCount = Math.ceil(image.length / imagesPerPage);
-  const changePage = (selected: any) => {
+  const changePage = ({ selected }: any) => {
     setPageNumber(selected);
   };
-  // const paginate = (pageNumber: any) => setCurrentPage(pageNumber);
   return (
     <div>
       <div className="main">
@@ -63,7 +52,11 @@ const ImageLoader = () => {
             Search
           </button>
         </div>
-        {displayImage}
+        <Images
+          pagesVisited={pagesVisited}
+          imagesPerPage={imagesPerPage}
+          image={image}
+        />
       </div>
       <ReactPaginate
         previousLabel={'Previous'}
