@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import ReactDOM from "react-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -5,18 +6,32 @@ import { Search } from "./search";
 import Images from "./Images";
 import Pagination from "./Pagination";
 import ReactPaginate from "react-paginate";
+=======
+import ReactDOM from 'react-dom';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+// import { Search } from './search';
+import Images from './Images';
+>>>>>>> 75e2b0d0e7fb6eaf6661685e7ae4b2465e129473
 
 const ImageLoader = () => {
   const [image, setImage] = useState([]);
+<<<<<<< HEAD
   const [searchedimage, setSearchedimage] = useState("");
   const [pageNumber, setPageNumber] = useState(0);
   // const [currentPage, setCurrentPage] = useState(1);
   const [imagesPerPage, setImagesPerPage] = useState(5);
   // const [loading, setLoading] = useState(false);
+=======
+  const [searchedimage, setSearchedimage] = useState('');
+  const [currentPage, setCurrentPage] = useState(0);
+  const [imgPerPage, setImgPerPage] = useState(10);
+  const [loading, setLoading] = useState(false);
+>>>>>>> 75e2b0d0e7fb6eaf6661685e7ae4b2465e129473
   useEffect(() => {
     // setLoading(true);
 
-    axios.get("https://jsonplaceholder.typicode.com/photos").then((res) => {
+    axios.get('https://jsonplaceholder.typicode.com/photos').then((res) => {
       console.log(res);
       setImage(res.data.slice(0, 200));
     });
@@ -63,7 +78,12 @@ const ImageLoader = () => {
             Search
           </button>
         </div>
+<<<<<<< HEAD
         {displayImage}
+=======
+
+        <Images image={image} loading={loading} />
+>>>>>>> 75e2b0d0e7fb6eaf6661685e7ae4b2465e129473
       </div>
       <ReactPaginate
         previousLabel={"Previous"}
