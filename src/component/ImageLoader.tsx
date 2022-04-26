@@ -11,7 +11,7 @@ const ImageLoader = () => {
   const [searchedimage, setSearchedimage] = useState("");
   const [pageNumber, setPageNumber] = useState(0);
   // const [currentPage, setCurrentPage] = useState(1);
-  const [imagesPerPage, setImagesPerPage] = useState(49);
+  const [imagesPerPage, setImagesPerPage] = useState(16);
   // const [loading, setLoading] = useState(false);
   useEffect(() => {
     // setLoading(true);
@@ -24,15 +24,6 @@ const ImageLoader = () => {
   }, []);
 
   const pagesVisited = pageNumber * imagesPerPage;
-  const displayImage = image
-    .slice(pagesVisited, pagesVisited + imagesPerPage)
-    .map((image: any) => (
-      // <div key={image.id} className="gallery">
-      <div className="image-style">
-        <img key={image.id} src={image.url} height={150} width={150}></img>
-      </div>
-      // </div>
-    ));
   const handleClick = () => {
     const filteredimage = image.filter((i: any) => {
       return i.title.includes(searchedimage);
@@ -43,7 +34,6 @@ const ImageLoader = () => {
   const changePage = ({ selected }: any) => {
     setPageNumber(selected);
   };
-  // const paginate = (pageNumber: any) => setCurrentPage(pageNumber);
   return (
     <div>
       <div className="main">
@@ -62,7 +52,11 @@ const ImageLoader = () => {
             Search
           </button>
         </div>
-        <div className="gallery">{displayImage}</div>
+        <Images
+          pagesVisited={pagesVisited}
+          imagesPerPage={imagesPerPage}
+          image={image}
+        />
       </div>
       <ReactPaginate
         previousLabel={"Previous"}

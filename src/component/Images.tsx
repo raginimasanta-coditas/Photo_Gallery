@@ -2,33 +2,35 @@ import React from "react";
 import { ImageProps } from "./ImageProps";
 interface Props {
   image: ImageProps[];
-  loading: boolean;
+  // loading: boolean;
+  pagesVisited: number;
+  imagesPerPage: number;
 }
 
-const Images = (props: any) => {
-  console.log(props.image);
-  console.log(props.loading);
+const Images = ({ image, pagesVisited, imagesPerPage }: any) => {
+  console.log(image, pagesVisited, pagesVisited + imagesPerPage);
 
-  if (props.loading) {
-    return <h2>loading....</h2>;
-  }
   return (
-    <div className="gallery">
-      {props.image.map((img: ImageProps) => (
-        <div className="image-style" key={img.id}>
-          <div className="flip-card">
-            <div className="flip-card-inner">
-              <div className="flip-card-front">
-                <img src={img.url} height={300} width={300}></img>
-              </div>
-              <div className="flip-card-back">
-                <img src={img.thumbnailUrl} alt="thumbNail" />
-                <h3>{img.title}</h3>
+    <div>
+      <div className="gallery">
+        {image
+          .slice(pagesVisited, pagesVisited + imagesPerPage)
+          .map((image: any) => (
+            <div className="image-style" key={image.id}>
+              <div className="flip-card">
+                <div className="flip-card-inner">
+                  <div className="flip-card-front">
+                    <img src={image.url} height={300} width={300}></img>
+                  </div>
+                  <div className="flip-card-back">
+                    <img src={image.thumbnailUrl} alt="thumbNail" />
+                    <h3>{image.title}</h3>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      ))}
+          ))}
+      </div>
     </div>
   );
 };
