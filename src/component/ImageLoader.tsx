@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Search from "./search";
 import Images from "./Images";
-import Pagination from "./Pagination";
 import ReactPaginate from "react-paginate";
 
 const ImageLoader = () => {
