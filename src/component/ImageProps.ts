@@ -1,7 +1,8 @@
 export interface ImageProps {
-  albumId: number;
-  id: number;
-  title: string;
+  // albumId: number;
+  // id: number;
+  // title: string;
+  name: string;
   url: string;
-  thumbnailUrl: string;
+  // thumbnailUrl: string;
 }

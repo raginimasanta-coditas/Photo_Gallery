@@ -14,16 +14,16 @@ const Images = (props: Props) => {
   }
   return (
     <div className="gallery">
-      {props.image.map((img: ImageProps) => (
-        <div className="image-style" key={img.id}>
+      {props.image.map((img: ImageProps, id: number) => (
+        <div className="image-style" key={id}>
           <div className="flip-card">
             <div className="flip-card-inner">
               <div className="flip-card-front">
                 <img src={img.url} height={300} width={300}></img>
               </div>
               <div className="flip-card-back">
-                <img src={img.thumbnailUrl} alt="thumbNail" />
-                <h3>{img.title}</h3>
+                <img src={img.url} alt="thumbNail" />
+                <h3>{img.name}</h3>
               </div>
             </div>
           </div>

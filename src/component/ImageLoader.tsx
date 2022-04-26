@@ -13,9 +13,9 @@ const ImageLoader: React.FC = () => {
   useEffect(() => {
     setLoading(true);
 
-    axios.get('https://jsonplaceholder.typicode.com/photos').then((res) => {
+    axios.get('https://pokeapi.co/api/v2/pokemon').then((res) => {
       console.log(res);
-      setImage(res.data.slice(0, 20));
+      setImage(res.data.results.slice(0, 20));
     });
     setLoading(false);
   }, []);
