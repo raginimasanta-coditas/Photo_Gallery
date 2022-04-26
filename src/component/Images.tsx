@@ -1,9 +1,5 @@
 import React from "react";
 
-// interface propsType{
-//     image: [],
-//     loading: Bo
-// }
 const Images = (props: any) => {
   console.log(props.image);
   console.log(props.loading);

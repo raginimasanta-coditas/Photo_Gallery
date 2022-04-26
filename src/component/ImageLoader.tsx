@@ -3,33 +3,48 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Search } from "./search";
 import Images from "./Images";
+import Pagination from "./Pagination";
+import ReactPaginate from "react-paginate";
 
-const ImageLoader: React.FC = () => {
+const ImageLoader = () => {
   const [image, setImage] = useState([]);
   const [searchedimage, setSearchedimage] = useState("");
-  const [currentPage, setCurrentPage] = useState(0);
-  const [imgPerPage, setImgPerPage] = useState(10);
-  const [loading, setLoading] = useState(false);
+  const [pageNumber, setPageNumber] = useState(0);
+  // const [currentPage, setCurrentPage] = useState(1);
+  const [imagesPerPage, setImagesPerPage] = useState(5);
+  // const [loading, setLoading] = useState(false);
   useEffect(() => {
-    setLoading(true);
+    // setLoading(true);
 
     axios.get("https://jsonplaceholder.typicode.com/photos").then((res) => {
       console.log(res);
-      setImage(res.data.slice(0, 20));
+      setImage(res.data.slice(0, 200));
     });
-    setLoading(false);
+    // setLoading(false);
   }, []);
 
-  const indexOfLastImage = currentPage * imgPerPage;
-  const indexOfFirstImage = indexOfLastImage - imgPerPage;
-  const currentImg = image.slice(indexOfFirstImage, indexOfLastImage);
+  const pagesVisited = pageNumber * imagesPerPage;
+  const displayImage = image
+    .slice(pagesVisited, pagesVisited + imagesPerPage)
+    .map((image: any) => (
+      // <img key={image.id} src={image.url} height={150} width={150}></img>
+      // <span key={image.id} className="gallery">
+      <span className="image-style">
+        <img key={image.id} src={image.url} height={150} width={150}></img>
+      </span>
+      // </span>
+    ));
   const handleClick = () => {
-    const filteredimage = image.filter((i) => {
+    const filteredimage = image.filter((i: any) => {
       return i.title.includes(searchedimage);
     });
     setImage(filteredimage);
   };
-
+  const pageCount = Math.ceil(image.length / imagesPerPage);
+  const changePage = (selected: any) => {
+    setPageNumber(selected);
+  };
+  // const paginate = (pageNumber: any) => setCurrentPage(pageNumber);
   return (
     <div>
       <div className="main">
@@ -48,35 +63,19 @@ const ImageLoader: React.FC = () => {
             Search
           </button>
         </div>
-        {/* <div className="gallery">
-          {image.map((i) => (
-            <div className="image-style">
-              <img key={i.id} src={i.url} height={150} width={150}></img>
-              <Images image={image} loading={loading} />
-            </div>
-          ))}
-        </div> */}
-        <Images image={image} loading={loading} />
+        {displayImage}
       </div>
-      <nav aria-label="...">
-        <ul className="pagination pagination-sm">
-          <li className="page-item disabled">
-            <a className="page-link" href="#">
-              1
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="#">
-              2
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="#">
-              3
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <ReactPaginate
+        previousLabel={"Previous"}
+        nextLabel={"Next"}
+        pageCount={pageCount}
+        onPageChange={changePage}
+        containerClassName={"paginationBttns"}
+        previousLinkClassName={"previousBttn"}
+        nextLinkClassName={"nextBttn"}
+        disabledClassName={"paginationDisabled"}
+        activeClassName={"paginationActive"}
+      />
     </div>
   );
 };
