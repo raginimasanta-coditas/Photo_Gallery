@@ -1,11 +1,11 @@
-import React from 'react';
-import { ImageProps } from './ImageProps';
+import React from "react";
+import { ImageProps } from "./ImageProps";
 interface Props {
   image: ImageProps[];
   loading: boolean;
 }
 
-const Images = (props: Props) => {
+const Images = (props: any) => {
   console.log(props.image);
   console.log(props.loading);
 
