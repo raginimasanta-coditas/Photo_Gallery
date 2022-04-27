@@ -5,6 +5,7 @@ import Search from "./search";
 import Images from "./Images";
 import ReactPaginate from "react-paginate";
 
+let defaultimage: React.SetStateAction<any[]>;
 const ImageLoader = () => {
   const [image, setImage] = useState([]);
   const [searchedimage, setSearchedimage] = useState("");
@@ -14,7 +15,8 @@ const ImageLoader = () => {
   useEffect(() => {
     axios.get("https://jsonplaceholder.typicode.com/photos").then((res) => {
       console.log(res);
-      setImage(res.data.slice(0, 200));
+      defaultimage = res.data.slice(0, 200);
+      setImage(defaultimage);
     });
   }, [searchedimage]);
 
@@ -24,12 +26,25 @@ const ImageLoader = () => {
   const changePage = ({ selected }: any) => {
     setPageNumber(selected);
   };
+
+  const setNewimage = (filteredimage: any) => {
+    console.log(filteredimage);
+
+    setImage(filteredimage);
+  };
+  const handleClear = () => {
+    setImage(defaultimage);
+  };
   return (
     <div>
       <div className="main">
         <h1 className="main-heading">Photo Gallery</h1>
 
-        <Search image={image} setImage={setImage} />
+        <Search
+          image={image}
+          setImage={setNewimage}
+          handleClear={handleClear}
+        />
 
         <Images
           pagesVisited={pagesVisited}
